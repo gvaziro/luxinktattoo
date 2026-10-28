@@ -12,7 +12,7 @@ export function GET() {
 
 > ${en.meta.description}
 
-LUX INK is a tattoo studio in Batumi, Georgia. Artists with over 5 years of experience work in a variety of styles — fine line, floral, lettering and calligraphy, blackwork, black & grey realism, black & red. Every design is created individually. Strict hygiene and sterilization: single-use materials wherever applicable, reusable equipment properly sterilized.
+LUX INK is a tattoo studio in Batumi, Georgia. Artists with over 5 years of experience work in a variety of styles: fine line, floral, lettering and calligraphy, blackwork, black & grey realism, black & red. Every design is created individually. Strict hygiene and sterilization: single-use materials wherever applicable, reusable equipment properly sterilized.
 
 ## Contact
 

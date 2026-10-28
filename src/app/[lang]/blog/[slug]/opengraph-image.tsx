@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { getPost, hasBlog } from "@/content/blog";
 
-export const alt = "LUX INK Tattoo Studio — Journal";
+export const alt = "LUX INK Tattoo Studio journal";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

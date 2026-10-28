@@ -37,7 +37,7 @@ export async function GET(_request: Request, { params }: RouteContext<"/[lang]/b
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escape(`${site.name} — ${blog.title}`)}</title>
+    <title>${escape(`${site.name}: ${blog.title}`)}</title>
     <link>${channelUrl}</link>
     <description>${escape(blog.metaDescription)}</description>
     <language>${lang}</language>

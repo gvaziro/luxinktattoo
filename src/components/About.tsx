@@ -5,10 +5,10 @@ import { ParallaxImage, Reveal, ScrollWords, SectionLabel } from "./ui/motion";
 export function About({ dict }: { dict: Dictionary["about"] }) {
   return (
     <section id="about" className="relative px-(--gutter) py-28 md:py-44">
-      <SectionLabel index="01" label={dict.label} />
+      <SectionLabel as="h2" index="01" label={dict.label} />
 
       <ScrollWords
-        as="h2"
+        as="p"
         text={dict.lead}
         className="mt-10 max-w-[18ch] font-display text-[clamp(2.6rem,6.4vw,6.6rem)] font-light leading-[0.98] tracking-[-0.01em] md:mt-14"
       />
@@ -25,10 +25,11 @@ export function About({ dict }: { dict: Dictionary["about"] }) {
 
         <div className="flex flex-col justify-between gap-14 md:col-span-6 md:col-start-7">
           <div className="space-y-8">
+            {/* Self-contained definition of the studio: the passage search engines and LLMs quote. */}
             <Reveal>
-              <p className="font-display text-[clamp(1.6rem,2.6vw,2.4rem)] leading-[1.2] text-bone">{dict.welcome}</p>
+              <p className="font-display text-[clamp(1.6rem,2.6vw,2.4rem)] leading-[1.2] text-bone">{dict.definition}</p>
             </Reveal>
-            {dict.paragraphs.map((p, i) => (
+            {[dict.welcome, ...dict.paragraphs].map((p, i) => (
               <Reveal key={i} delay={0.08 * (i + 1)}>
                 <p className="max-w-xl text-[0.98rem] leading-[1.8] text-ash md:text-[1.05rem]">{p}</p>
               </Reveal>

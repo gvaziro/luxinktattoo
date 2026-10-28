@@ -21,15 +21,39 @@ export const site = {
     region: "Adjara",
     country: "GE",
   },
-  coordinatesLabel: "41°38′N · 41°38′E",
-  mapsQuery: "LUX INK Tattoo Studio, Petre Melikishvili Street 13, Batumi, Georgia",
+  /** The studio's Google Business Profile listing ("Lux Ink Tattoo Studio" on Google Maps). */
+  googleMaps: {
+    cid: "14017873251736338653",
+    featureId: "0x4067870029c18805:0xc2897d73dc31c0dd",
+    name: "Lux Ink Tattoo Studio",
+    lat: 41.6493493,
+    lng: 41.6292517,
+  },
+  coordinatesLabel: "41°38′58″N · 41°37′45″E",
 } as const;
 
 export const whatsappLink = (message?: string) =>
   `https://wa.me/${site.whatsapp}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
 
-export const directionsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.mapsQuery)}`;
+/** Opens the studio's own place card (reviews, photos, hours), not just a pin on the address. */
+export const mapsPlaceLink = `https://www.google.com/maps?cid=${site.googleMaps.cid}`;
 
-export const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
-  "Petre Melikishvili Street 13, Batumi, Georgia",
-)}&z=17&output=embed`;
+export const directionsLink = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+  `${site.googleMaps.name}, Batumi`,
+)}`;
+
+/**
+ * Embed of the studio's place card, as produced by Google Maps "Share → Embed a map",
+ * with the interface language switched to the page language.
+ */
+export function mapEmbedSrc(lang: string) {
+  const { featureId, name, lat, lng } = site.googleMaps;
+  const pb = [
+    "!1m18!1m12!1m3!1d2981.295858107166",
+    `!2d${lng}!3d${lat}`,
+    "!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2",
+    `!1s${encodeURIComponent(featureId)}!2s${encodeURIComponent(name)}`,
+    `!5e0!3m2!1s${lang}!2sge!4v1793214931490!5m2!1s${lang}!2sge`,
+  ].join("");
+  return `https://www.google.com/maps/embed?pb=${pb}`;
+}

@@ -17,6 +17,10 @@ export type Post = {
   updated?: string;
   cover: ImageKey;
   coverAlt: string;
+  /** 40-55 word, brand-free answer to the main query; shown under the headline and easy for search engines and LLMs to quote. */
+  keyTakeaway: string;
   /** Article body in Markdown. */
   body: string;
+  /** Rendered as the FAQ section and as FAQPage JSON-LD from the same data, so both always match. */
+  faq: { q: string; a: string }[];
 };

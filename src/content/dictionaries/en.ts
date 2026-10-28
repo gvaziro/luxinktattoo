@@ -1,9 +1,9 @@
 export const en = {
   meta: {
-    title: "LUX INK Tattoo Studio Batumi — Custom Tattoos in Batumi, Georgia",
-    titleTemplate: "%s · LUX INK Tattoo Studio Batumi",
+    title: "Tattoo Studio in Batumi, Georgia: Custom Tattoos | LUX INK",
+    titleTemplate: "%s | LUX INK",
     description:
-      "LUX INK — tattoo studio in Batumi, Georgia. Artists with 5+ years of experience, custom designs in a variety of styles, strict hygiene and sterilization. Book via WhatsApp +995 558 669 399.",
+      "Tattoo studio in Batumi, Georgia: custom designs in any style by artists with 5+ years of experience and strict sterilization. Book on WhatsApp.",
     keywords: [
       "tattoo Batumi",
       "tattoo studio Batumi",
@@ -17,7 +17,7 @@ export const en = {
       "lettering tattoo",
       "LUX INK",
     ],
-    ogAlt: "LUX INK Tattoo Studio — Batumi, Georgia",
+    ogAlt: "LUX INK Tattoo Studio, Batumi, Georgia",
   },
   nav: {
     about: "About",
@@ -41,14 +41,16 @@ export const en = {
     ctaPrimary: "Book on WhatsApp",
     ctaSecondary: "View our work",
     scroll: "Scroll",
-    imageAlt: "Classical marble sculpture covered in calligraphy tattoos — LUX INK brand artwork",
+    imageAlt: "Classical marble sculpture covered in calligraphy tattoos, the LUX INK brand artwork",
   },
   marquee: ["Art", "Individuality", "Professionalism", "Custom designs", "Batumi"],
   about: {
-    label: "About us",
+    label: "About our tattoo studio in Batumi",
     lead: "At LUX INK, we believe that every tattoo tells a story.",
+    definition:
+      "LUX INK is a tattoo studio in Batumi, Georgia, at Petre Melikishvili Street 13. Our tattoo artists, each with more than five years of experience, create custom tattoos in a variety of styles, from fine line and lettering to black and grey realism, under strict hygiene and sterilization standards.",
     welcome:
-      "Welcome to LUX INK Tattoo Studio — a creative space where art, individuality, and professionalism come together.",
+      "Welcome to LUX INK Tattoo Studio: a creative space where art, individuality, and professionalism come together.",
     paragraphs: [
       "Our experienced artists, each with over 5 years of experience, work in a variety of tattoo styles to bring your ideas to life.",
       "We create custom designs tailored to each client’s vision, personality, and preferences. Every piece is approached individually, with attention to detail and a commitment to quality.",
@@ -62,10 +64,10 @@ export const en = {
     imageAlt: "Interior of LUX INK tattoo studio in Batumi with classic stucco ceiling and crystal chandelier",
   },
   work: {
-    label: "Selected work",
+    label: "Tattoo portfolio",
     title: "Ink that tells a story",
     intro:
-      "A selection of pieces by our artists — from fine line florals and calligraphy to black & grey realism and black & red.",
+      "A selection of pieces by our artists, from fine line florals and calligraphy to black & grey realism and black & red.",
     more: "More work on Instagram",
     view: "View",
     close: "Close",
@@ -107,7 +109,7 @@ export const en = {
     },
   },
   standards: {
-    label: "Our standards",
+    label: "Tattoo studio standards",
     title: "Professionalism in every detail",
     items: [
       {
@@ -129,9 +131,9 @@ export const en = {
     ],
   },
   studio: {
-    label: "The studio",
+    label: "Inside the tattoo studio",
     title: "A calm, cozy and welcoming space",
-    text: "High stucco ceilings, warm wood and soft light — a place where you can relax and feel at ease from the first sketch to the last line.",
+    text: "High stucco ceilings, warm wood and soft light: a place where you can relax and feel at ease from the first sketch to the last line.",
     hint: "Scroll to explore",
     photos: {
       interior: { caption: "The studio", alt: "Main room of LUX INK tattoo studio with tattoo chairs and red lamps" },
@@ -149,12 +151,12 @@ export const en = {
     closingAccent: "emotion.",
   },
   process: {
-    label: "How it works",
+    label: "How to book a tattoo",
     title: "From idea to art",
     steps: [
       {
         title: "Share your idea",
-        text: "Message us on WhatsApp or Instagram. Tell us about your idea, the placement and approximate size — references are welcome.",
+        text: "Message us on WhatsApp or Instagram. Tell us about your idea, the placement and approximate size. References are welcome.",
       },
       {
         title: "Design consultation",
@@ -167,7 +169,7 @@ export const en = {
     ],
   },
   faq: {
-    label: "FAQ",
+    label: "Tattoo FAQ",
     title: "Questions & answers",
     items: [
       {
@@ -176,7 +178,7 @@ export const en = {
       },
       {
         q: "Do you create custom tattoo designs?",
-        a: "Yes. Every design is created individually — around your ideas, personality and preferences, with attention to detail and a commitment to quality.",
+        a: "Yes. Every design is created individually, around your ideas, personality and preferences, with attention to detail and a commitment to quality.",
       },
       {
         q: "How experienced are your artists?",
@@ -184,7 +186,7 @@ export const en = {
       },
       {
         q: "Which tattoo styles do you work in?",
-        a: "We work in a variety of styles — from fine line, floral and lettering to black & grey realism and black & red pieces. Share your idea and we’ll bring it to life.",
+        a: "We work in a variety of styles: from fine line, floral and lettering to black & grey realism and black & red pieces. Share your idea and we’ll bring it to life.",
       },
       {
         q: "Is it safe and hygienic?",
@@ -197,7 +199,7 @@ export const en = {
     ],
   },
   contact: {
-    label: "Book your appointment",
+    label: "Book a tattoo in Batumi",
     title: "Ready to bring your idea to life?",
     text: "Contact us to discuss your design and book your appointment. Write to us on Instagram or WhatsApp to book your session.",
     whatsapp: "Write on WhatsApp",
@@ -205,6 +207,7 @@ export const en = {
     addressLabel: "Address",
     address: "Petre Melikishvili Street 13, Batumi, Georgia",
     directions: "Get directions",
+    mapsLink: "Open in Google Maps",
     phoneLabel: "WhatsApp",
     instagramLabel: "Instagram",
     mapTitle: "Map: LUX INK Tattoo Studio, Petre Melikishvili Street 13, Batumi",
@@ -220,11 +223,11 @@ export const en = {
   blog: {
     label: "Journal",
     title: "Tattoo journal",
-    metaTitle: "Tattoo Blog: Aftercare, Styles and Tips from Batumi",
+    metaTitle: "Tattoo Blog: Aftercare, Styles and Tips",
     metaDescription:
       "Articles from LUX INK Tattoo Studio in Batumi: tattoo aftercare, styles, preparing for a session, pain and getting a tattoo on holiday in Batumi.",
     intro:
-      "Practical guides from our artists — how to prepare, how to heal and how to choose a style you will love for life.",
+      "Practical guides from our artists: how to prepare, how to heal and how to choose a style you will love for life.",
     latest: "From the journal",
     readMore: "Read article",
     allPosts: "All articles",
@@ -232,11 +235,20 @@ export const en = {
     updated: "Updated",
     toc: "Contents",
     related: "Read also",
-    ctaTitle: "Have an idea for a tattoo?",
-    ctaText: "Tell us about it — our artists will create an individual design just for you.",
+    ctaText: "Tell us about your idea, and our artists will create an individual design just for you.",
     ctaButton: "Write on WhatsApp",
     home: "Home",
     backToBlog: "Back to the journal",
+    byline: "By",
+    published: "Published",
+    keyTakeaway: "Key takeaway",
+    faqTitle: "Frequently asked questions",
+    gettingStarted: "Getting started",
+    gettingStartedSteps: [
+      "Message us on WhatsApp or Instagram with your idea, the placement and the approximate size.",
+      "Discuss the details with your artist and approve an individual design.",
+      "Come to the studio at Petre Melikishvili Street 13, Batumi, for your session.",
+    ],
   },
   notFound: {
     title: "Page not found",

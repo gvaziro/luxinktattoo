@@ -10,9 +10,9 @@ export function Standards({ dict }: { dict: Dictionary["standards"] }) {
       <div className="grid gap-16 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-5">
           <div className="md:sticky md:top-32">
-            <SectionLabel index="03" label={dict.label} />
+            <SectionLabel as="h2" index="03" label={dict.label} />
             <SplitWords
-              as="h2"
+              as="p"
               text={dict.title}
               className="mt-8 block max-w-[12ch] font-display text-[clamp(2.8rem,5.6vw,5.6rem)] font-light leading-[0.98]"
             />

@@ -70,7 +70,7 @@ export function Hero({ dict, waMessage }: Props) {
         >
           <p>
             <span className="text-bone">{dict.eyebrow}</span>
-            <span className="mx-3 text-blood">—</span>
+            <span aria-hidden="true" className="mx-3 inline-block h-px w-5 bg-blood align-middle" />
             {dict.location}
           </p>
           <p className="hidden sm:block">{site.coordinatesLabel}</p>
@@ -158,7 +158,7 @@ export function Hero({ dict, waMessage }: Props) {
             animate={{ opacity: 1, letterSpacing: "0.55em" }}
             transition={{ duration: 1.8, ease: EASE_OUT, delay: 1.05 }}
           >
-            <span className="sr-only"> — </span>
+            <span className="sr-only">: </span>
             {dict.h1Sub}
           </motion.span>
         </motion.h1>

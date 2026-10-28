@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/blog">): P
   const { lang } = await params;
   if (!hasBlog(lang)) return {};
   const { blog } = getDictionary(lang);
-  const title = `${blog.metaTitle} — LUX INK`;
+  const title = `${blog.metaTitle} | LUX INK`;
 
   return {
     title: { absolute: title },
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/blog">): P
         ...Object.fromEntries(blogLocales.map((l) => [localeMeta[l].hreflang, blogPath(l)])),
         "x-default": blogPath("en"),
       },
-      types: { "application/rss+xml": [{ url: `${blogPath(lang)}/rss.xml`, title: `${site.name} — ${blog.label}` }] },
+      types: { "application/rss+xml": [{ url: `${blogPath(lang)}/rss.xml`, title: `${site.name}: ${blog.label}` }] },
     },
     openGraph: {
       type: "website",

@@ -104,7 +104,7 @@ export function Header({ lang, nav, waMessage, blogHref, blogSlugs }: Props) {
             href={onHome ? "#top" : localePath(lang)}
             onClick={(e) => onLinkClick(e, onHome ? "#top" : localePath(lang))}
             className="relative z-10 flex flex-col leading-none"
-            aria-label={`${site.shortName} — ${localeMeta[lang].name}`}
+            aria-label={`${site.shortName}, ${localeMeta[lang].name}`}
           >
             <span className="whitespace-nowrap font-display text-[1.45rem] font-medium tracking-[0.14em]">LUX INK</span>
             <span className="mt-1 whitespace-nowrap text-[0.5rem] uppercase tracking-[0.52em] text-ash">Tattoo Studio</span>

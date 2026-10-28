@@ -3,8 +3,8 @@ import type { Post } from "../../types";
 const post: Post = {
   translationKey: "prepare",
   slug: "how-to-prepare-for-a-tattoo",
-  title: "How to Prepare for a Tattoo Session: 12 Tips From Our Artists",
-  seoTitle: "How to Prepare for a Tattoo: 12 Tips Before Your Session",
+  title: "How to prepare for a tattoo session: 12 tips from our artists",
+  seoTitle: "How to prepare for a tattoo: 12 tips",
   description:
     "What to do before a tattoo appointment: sleep, food, alcohol, skin care, clothes and what to bring. A simple checklist from LUX INK Tattoo Studio in Batumi.",
   keywords: [
@@ -12,12 +12,14 @@ const post: Post = {
     "before a tattoo session",
     "first tattoo tips",
     "tattoo appointment checklist",
-    "tattoo Batumi",
+    "alcohol before a tattoo",
   ],
   category: "Before the session",
   published: "2026-10-28",
   cover: "workspace",
   coverAlt: "Tattoo workstations with professional chairs and red lamps at LUX INK studio in Batumi",
+  keyTakeaway:
+    "Before a tattoo session, agree on the design in advance, moisturise the skin, avoid sunburn and skip alcohol for at least 24 hours. Sleep well, eat a full meal one or two hours before, drink water and wear loose clothes that give easy access to the area.",
   body: `
 A good tattoo session starts long before the needle touches the skin. How you sleep, eat and treat your skin in the days before affects how comfortable you feel in the chair, how well the ink goes in and how smoothly the tattoo heals.
 
@@ -27,7 +29,7 @@ Whether it is your first tattoo or your tenth, here is a simple checklist our ar
 
 ### 1. Agree on the design in advance
 
-Bring references, but leave room for the artist. At LUX INK every design is created individually, so we discuss your idea, the placement and the size before the session. The clearer the idea, the better the result — and the less time you spend changing things on the day.
+Bring references, but leave room for the artist. At LUX INK every design is created individually, so we discuss your idea, the placement and the size before the session ([how it works](/#process)). The clearer the idea, the better the result, and the less time you spend changing things on the day. If you are unsure about the look, our [guide to tattoo styles](/blog/tattoo-styles-guide) helps put the idea into words.
 
 ### 2. Take care of the skin
 
@@ -35,11 +37,11 @@ Moisturise the area for a few days beforehand. Hydrated skin takes ink more even
 
 ### 3. No sunburn, no tan in progress
 
-Sunburned or peeling skin cannot be tattooed. If you are in Batumi in the summer, keep the future tattoo area out of the sun for a few days before the session.
+Sunburned or peeling skin cannot be tattooed. If you are in Batumi in the summer, keep the future tattoo area out of the sun for a few days before the session; our guide to [getting a tattoo on holiday in Batumi](/blog/tattoo-on-holiday-in-batumi) covers the beach season in detail.
 
 ### 4. Tell your artist about your health
 
-Let the artist know about allergies, skin conditions, diabetes, blood-clotting disorders, medication or pregnancy. This is confidential and helps the artist work safely. If you take prescribed medication, talk to your doctor — never stop it on your own.
+Let the artist know about allergies, skin conditions, diabetes, blood-clotting disorders, medication or pregnancy. This is confidential and helps the artist work safely. If you take prescribed medication, talk to your doctor and never stop it on your own.
 
 ## The day before
 
@@ -63,11 +65,11 @@ Have a full meal one or two hours before the session. Stable blood sugar helps p
 
 ### 9. Drink water, not energy drinks
 
-Stay hydrated, but go easy on coffee and energy drinks — too much caffeine can make you jittery and more sensitive.
+Stay hydrated, but go easy on coffee and energy drinks: too much caffeine can make you jittery and more sensitive.
 
 ### 10. Dress for the placement
 
-Wear comfortable, loose clothing that gives easy access to the tattoo area and that you don't mind getting a little ink on. For a forearm — short sleeves; for a thigh — loose shorts or a skirt.
+Wear comfortable, loose clothing that gives easy access to the tattoo area and that you don't mind getting a little ink on. For a forearm, short sleeves; for a thigh, loose shorts or a skirt.
 
 ### 11. Bring the essentials
 
@@ -77,12 +79,12 @@ Wear comfortable, loose clothing that gives easy access to the tattoo area and t
 
 ### 12. Plan your time
 
-Do not squeeze a session between other appointments. Larger pieces can take several hours, and you want the artist to work without rushing — and yourself to leave without stress.
+Do not squeeze a session between other appointments. Larger pieces can take several hours, and you want the artist to work without rushing and yourself to leave without stress.
 
 ## During the session
 
 - **Breathe slowly and evenly.** Holding your breath increases tension.
-- **Ask for a break** whenever you need one — that is completely normal.
+- **Ask for a break** whenever you need one: that is completely normal.
 - **Stay still** and tell the artist before you move.
 - **Speak up** if you feel dizzy or unwell.
 
@@ -90,7 +92,7 @@ Wondering how much it will hurt? Read our guide: [does getting a tattoo hurt?](/
 
 ## After the session
 
-Your artist will cover the tattoo and explain aftercare. Follow those instructions closely — the first two weeks decide how your tattoo will look for years. Our [aftercare guide](/blog/tattoo-aftercare-guide) covers every stage of healing.
+Your artist will cover the tattoo and explain aftercare. Follow those instructions closely: the first two weeks decide how your tattoo will look for years. Our [aftercare guide](/blog/tattoo-aftercare-guide) covers every stage of healing.
 
 ## Printable checklist
 
@@ -101,10 +103,28 @@ Your artist will cover the tattoo and explain aftercare. Follow those instructio
 - Good sleep, full meal, enough water.
 - Comfortable clothes with access to the area.
 - Water, snack, headphones.
-- Free time — no rush after the session.
+- Free time, no rush after the session.
 
-Ready to start? Write to us on [WhatsApp](https://wa.me/995558669399) with your idea, and we will find a date. [Book your session](/#contact) at LUX INK, Petre Melikishvili Street 13, Batumi.
+Ready to start? Our [tattoo artists in Batumi](/) are happy to discuss your idea on [WhatsApp](https://wa.me/995558669399) and find a date. [Book your session](/#contact) at Petre Melikishvili Street 13.
 `,
+  faq: [
+    {
+      q: "Can I drink alcohol before a tattoo?",
+      a: "It is best to avoid alcohol for at least 24 hours before the session. Alcohol thins the blood and dehydrates the body, which can increase bleeding.",
+    },
+    {
+      q: "Should I eat before a tattoo?",
+      a: "Yes. Have a full meal one or two hours before the session to keep your blood sugar stable and avoid dizziness.",
+    },
+    {
+      q: "What should I wear to a tattoo appointment?",
+      a: "Comfortable, loose clothing that gives easy access to the tattoo area and that you don't mind getting a little ink on.",
+    },
+    {
+      q: "Can I get a tattoo on sunburned skin?",
+      a: "No. Sunburned or peeling skin cannot be tattooed. Keep the area out of the sun for a few days before the session.",
+    },
+  ],
 };
 
 export default post;

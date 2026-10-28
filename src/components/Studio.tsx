@@ -59,9 +59,9 @@ export function Studio({ dict }: { dict: Dictionary["studio"] }) {
           )}
         >
           <div className={cx("flex shrink-0 snap-start flex-col justify-center", pinned ? "w-[min(40vw,560px)] pr-6" : "w-[82vw] md:w-[min(44vw,560px)]")}>
-            <SectionLabel index="04" label={dict.label} />
+            <SectionLabel as="h2" index="04" label={dict.label} />
             <SplitWords
-              as="h2"
+              as="p"
               text={dict.title}
               className="mt-8 block font-display text-[clamp(2.6rem,4.8vw,5rem)] font-light leading-[0.98]"
             />

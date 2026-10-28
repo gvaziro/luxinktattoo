@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/content/site";
 
-export const alt = "LUX INK Tattoo Studio — Batumi, Georgia";
+export const alt = "LUX INK Tattoo Studio, Batumi, Georgia";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -85,7 +85,7 @@ export default async function OpengraphImage() {
           }}
         >
           <span style={{ color: bone }}>BATUMI</span>
-          <span style={{ color: blood, margin: "0 14px" }}>—</span>
+          <div style={{ width: 28, height: 2, background: blood, margin: "0 16px", display: "flex" }} />
           GEORGIA
         </div>
         <div style={{ position: "absolute", right: 56, top: 52, fontSize: 24, fontWeight: 500, letterSpacing: 4, color: ash }}>

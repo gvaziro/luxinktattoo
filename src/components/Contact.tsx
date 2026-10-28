@@ -1,9 +1,20 @@
-import type { Dictionary } from "@/content/i18n";
-import { directionsLink, mapEmbedSrc, site, whatsappLink } from "@/content/site";
+import type { Dictionary, Locale } from "@/content/i18n";
+import { directionsLink, mapEmbedSrc, mapsPlaceLink, site, whatsappLink } from "@/content/site";
 import { ArrowIcon, InstagramIcon, PinIcon, WhatsAppIcon } from "./icons";
 import { Magnetic, PillLink, Reveal, SectionLabel, SplitWords } from "./ui/motion";
 
-export function Contact({ dict, index = "08" }: { dict: Dictionary["contact"]; index?: string }) {
+const mapLinkClass =
+  "group inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.24em] text-bone-dim transition-colors hover:text-blood";
+
+export function Contact({
+  lang,
+  dict,
+  index = "08",
+}: {
+  lang: Locale;
+  dict: Dictionary["contact"];
+  index?: string;
+}) {
   const wa = whatsappLink(dict.waMessage);
 
   return (
@@ -13,9 +24,9 @@ export function Contact({ dict, index = "08" }: { dict: Dictionary["contact"]; i
         className="pointer-events-none absolute -top-40 left-1/2 h-[60vh] w-[90vw] -translate-x-1/2 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(200,22,29,0.14),transparent_70%)]"
       />
 
-      <SectionLabel index={index} label={dict.label} className="relative" />
+      <SectionLabel as="h2" index={index} label={dict.label} className="relative" />
       <SplitWords
-        as="h2"
+        as="p"
         text={dict.title}
         step={0.05}
         className="relative mt-10 block max-w-[15ch] font-display text-[clamp(3.2rem,8.6vw,9rem)] font-light leading-[0.92]"
@@ -43,16 +54,17 @@ export function Contact({ dict, index = "08" }: { dict: Dictionary["contact"]; i
         <address className="grid gap-px not-italic md:col-span-5 md:pr-10">
           <ContactRow label={dict.addressLabel}>
             <p className="font-display text-[1.7rem] leading-snug md:text-[2rem]">{dict.address}</p>
-            <a
-              href={directionsLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-4 inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.24em] text-bone-dim transition-colors hover:text-blood"
-            >
-              <PinIcon className="size-4" />
-              {dict.directions}
-              <ArrowIcon className="size-3.5 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
+            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
+              <a href={directionsLink} target="_blank" rel="noopener noreferrer" className={mapLinkClass}>
+                <PinIcon className="size-4" />
+                {dict.directions}
+                <ArrowIcon className="size-3.5 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+              <a href={mapsPlaceLink} target="_blank" rel="noopener noreferrer" className={mapLinkClass}>
+                {dict.mapsLink}
+                <ArrowIcon className="size-3.5 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            </div>
           </ContactRow>
           <ContactRow label={dict.phoneLabel}>
             <a
@@ -80,9 +92,10 @@ export function Contact({ dict, index = "08" }: { dict: Dictionary["contact"]; i
           <div className="relative aspect-[4/3] overflow-hidden bg-ink-2 md:aspect-[16/11]">
             <iframe
               title={dict.mapTitle}
-              src={mapEmbedSrc}
+              src={mapEmbedSrc(lang)}
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
               className="map-dark absolute inset-0 size-full border-0"
             />
             <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-line" aria-hidden="true" />

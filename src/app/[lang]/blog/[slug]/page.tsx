@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/blog/Breadcrumbs";
 import { PostCard, PostMeta, formatDate } from "@/components/blog/PostCard";
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/blog/[slug
   }
   if (translations.en) languages["x-default"] = postPath("en", translations.en.slug);
 
-  const title = `${post.seoTitle ?? post.title} — LUX INK`;
+  const title = `${post.seoTitle ?? post.title} | LUX INK`;
   const url = postPath(lang, post.slug);
 
   return {
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/blog/[slug
     alternates: {
       canonical: url,
       languages,
-      types: { "application/rss+xml": [{ url: `${blogPath(lang)}/rss.xml`, title: `${site.name} — ${blog.label}` }] },
+      types: { "application/rss+xml": [{ url: `${blogPath(lang)}/rss.xml`, title: `${site.name}: ${blog.label}` }] },
     },
     openGraph: {
       type: "article",
@@ -78,6 +79,11 @@ export default async function BlogPost({ params }: PageProps<"/[lang]/blog/[slug
 
   const dict = getDictionary(lang);
   const { html, toc } = renderMarkdown(post.body);
+  const contents = [
+    ...toc,
+    { id: "faq", text: dict.blog.faqTitle },
+    { id: "getting-started", text: dict.blog.gettingStarted },
+  ];
   const related = getRelated(lang, post);
 
   return (
@@ -93,7 +99,7 @@ export default async function BlogPost({ params }: PageProps<"/[lang]/blog/[slug
               { label: post.title },
             ]}
           />
-          <PostMeta lang={lang} post={post} minRead={dict.blog.minRead} className="mt-12 md:mt-16" />
+          <PostMeta lang={lang} post={post} minRead={dict.blog.minRead} showDate={false} className="mt-12 md:mt-16" />
           <SplitWords
             as="h1"
             animateOnMount
@@ -101,8 +107,36 @@ export default async function BlogPost({ params }: PageProps<"/[lang]/blog/[slug
             text={post.title}
             className="mt-6 block max-w-[22ch] font-display text-[clamp(2.6rem,6.2vw,6.4rem)] font-light leading-[0.98]"
           />
+
+          <Reveal delay={0.3}>
+            <p className="mt-8 flex flex-wrap gap-x-5 gap-y-1 text-[0.72rem] uppercase tracking-[0.2em] text-ash">
+              <span>
+                {dict.blog.byline}{" "}
+                <Link
+                  href={localePath(lang)}
+                  className="text-bone-dim underline decoration-blood underline-offset-4 transition-colors hover:text-bone"
+                >
+                  {site.name}
+                </Link>
+              </span>
+              <span>
+                {dict.blog.published} <time dateTime={post.published}>{formatDate(lang, post.published)}</time>
+              </span>
+              {post.updated ? (
+                <span>
+                  {dict.blog.updated} <time dateTime={post.updated}>{formatDate(lang, post.updated)}</time>
+                </span>
+              ) : null}
+            </p>
+          </Reveal>
+
           <Reveal delay={0.4}>
-            <p className="mt-8 max-w-2xl text-[1.1rem] leading-[1.75] text-bone-dim md:text-[1.2rem]">{post.description}</p>
+            <aside aria-label={dict.blog.keyTakeaway} className="mt-10 max-w-3xl border-l border-blood pl-6 md:pl-8">
+              <p className="text-[0.65rem] font-medium uppercase tracking-[0.3em] text-blood">{dict.blog.keyTakeaway}</p>
+              <p className="mt-3 font-display text-[clamp(1.35rem,2.2vw,1.8rem)] leading-[1.35] text-bone">
+                {post.keyTakeaway}
+              </p>
+            </aside>
           </Reveal>
         </header>
 
@@ -122,7 +156,7 @@ export default async function BlogPost({ params }: PageProps<"/[lang]/blog/[slug
             <nav aria-label={dict.blog.toc} className="md:sticky md:top-28">
               <p className="text-[0.65rem] uppercase tracking-[0.3em] text-ash">{dict.blog.toc}</p>
               <ol className="mt-5 space-y-3 border-l border-line pl-5 text-sm">
-                {toc.map((item) => (
+                {contents.map((item) => (
                   <li key={item.id}>
                     <a href={`#${item.id}`} className="text-bone-dim transition-colors hover:text-blood">
                       {item.text}
@@ -130,27 +164,60 @@ export default async function BlogPost({ params }: PageProps<"/[lang]/blog/[slug
                   </li>
                 ))}
               </ol>
-              {post.updated ? (
-                <p className="mt-8 text-[0.65rem] uppercase tracking-[0.24em] text-ash">
-                  {dict.blog.updated}: <time dateTime={post.updated}>{formatDate(lang, post.updated)}</time>
-                </p>
-              ) : null}
             </nav>
           </aside>
 
           <div className="min-w-0 md:col-span-8 md:col-start-5 lg:col-span-7 lg:col-start-5">
             <div className="prose-ink" dangerouslySetInnerHTML={{ __html: html }} />
 
-            <aside className="relative mt-20 overflow-hidden border border-line bg-ink-2 p-8 md:p-12">
+            <section aria-labelledby="faq" className="mt-20">
+              <h2 id="faq" className="scroll-mt-24 font-display text-[clamp(1.9rem,3vw,2.6rem)] leading-[1.1]">
+                {dict.blog.faqTitle}
+              </h2>
+              <div className="mt-8 border-t border-line">
+                {post.faq.map((item, i) => (
+                  <details key={item.q} open={i === 0} className="faq-details group border-b border-line">
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 [&::-webkit-details-marker]:hidden">
+                      <h3 className="font-display text-[1.35rem] leading-snug text-bone-dim transition-colors group-open:text-bone">
+                        {item.q}
+                      </h3>
+                      <span
+                        aria-hidden="true"
+                        className="mt-1 grid size-9 shrink-0 place-items-center rounded-full border border-bone/20 text-lg leading-none transition-transform duration-500 group-open:rotate-45 group-open:border-blood group-open:bg-blood"
+                      >
+                        +
+                      </span>
+                    </summary>
+                    <p className="pb-7 pr-12 text-[1rem] leading-[1.8] text-ash">{item.a}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+
+            <section
+              aria-labelledby="getting-started"
+              className="relative mt-20 overflow-hidden border border-line bg-ink-2 p-8 md:p-12"
+            >
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_80%_at_100%_100%,rgba(200,22,29,0.18),transparent_70%)]"
               />
-              <p className="relative font-display text-[clamp(2rem,3.6vw,3.2rem)] font-light leading-[1.05]">
-                {dict.blog.ctaTitle}
-              </p>
+              <h2
+                id="getting-started"
+                className="relative scroll-mt-24 font-display text-[clamp(2rem,3.6vw,3.2rem)] font-light leading-[1.05]"
+              >
+                {dict.blog.gettingStarted}
+              </h2>
               <p className="relative mt-4 max-w-md text-ash">{dict.blog.ctaText}</p>
-              <div className="relative mt-8 flex flex-wrap gap-3">
+              <ol className="relative mt-8 space-y-4">
+                {dict.blog.gettingStartedSteps.map((step, i) => (
+                  <li key={i} className="flex gap-4 text-bone-dim">
+                    <span className="font-display text-xl text-blood">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="pt-0.5">{step}</span>
+                  </li>
+                ))}
+              </ol>
+              <div className="relative mt-10 flex flex-wrap gap-3">
                 <PillLink href={whatsappLink(dict.contact.waMessage)} external icon={<WhatsAppIcon />}>
                   {dict.blog.ctaButton}
                 </PillLink>
@@ -158,7 +225,7 @@ export default async function BlogPost({ params }: PageProps<"/[lang]/blog/[slug
                   Instagram
                 </PillLink>
               </div>
-            </aside>
+            </section>
           </div>
         </div>
       </article>

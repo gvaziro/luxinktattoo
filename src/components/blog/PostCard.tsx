@@ -15,11 +15,13 @@ export function PostMeta({
   post,
   minRead,
   className,
+  showDate = true,
 }: {
   lang: BlogLocale;
   post: Post;
   minRead: string;
   className?: string;
+  showDate?: boolean;
 }) {
   return (
     <p className={cx("flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.65rem] uppercase tracking-[0.24em] text-ash", className)}>
@@ -28,8 +30,12 @@ export function PostMeta({
       <span>
         {readingTime(post.body)} {minRead}
       </span>
-      <span aria-hidden="true">·</span>
-      <time dateTime={post.published}>{formatDate(lang, post.published)}</time>
+      {showDate ? (
+        <>
+          <span aria-hidden="true">·</span>
+          <time dateTime={post.published}>{formatDate(lang, post.published)}</time>
+        </>
+      ) : null}
     </p>
   );
 }

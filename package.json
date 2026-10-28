@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seo:audit": "node scripts/seo-audit.mjs",
+    "icons": "node scripts/generate-icons.mjs"
   },
   "dependencies": {
     "lenis": "^1.3.27",

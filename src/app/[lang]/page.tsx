@@ -33,7 +33,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <Process dict={dict.process} />
         {hasBlog(lang) ? <Journal lang={lang} dict={dict.blog} /> : null}
         <Faq dict={dict.faq} index={hasBlog(lang) ? "08" : "07"} />
-        <Contact dict={dict.contact} index={hasBlog(lang) ? "09" : "08"} />
+        <Contact lang={lang} dict={dict.contact} index={hasBlog(lang) ? "09" : "08"} />
       </main>
     </>
   );

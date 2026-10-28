@@ -1,7 +1,7 @@
 import { blogPath, lastModified, postPath, type BlogLocale, type Post } from "./blog";
 import { localePath, locales, type Dictionary, type Locale } from "./i18n";
 import { allImages, workImages, workOrder } from "./media";
-import { directionsLink, site, whatsappLink } from "./site";
+import { mapsPlaceLink, site, whatsappLink } from "./site";
 
 const absolute = (path: string) => `${site.url}${path}`;
 
@@ -42,9 +42,10 @@ export function buildJsonLd(lang: Locale, dict: Dictionary) {
           addressRegion: site.address.region,
           addressCountry: site.address.country,
         },
-        hasMap: directionsLink,
+        geo: { "@type": "GeoCoordinates", latitude: site.googleMaps.lat, longitude: site.googleMaps.lng },
+        hasMap: mapsPlaceLink,
         areaServed: { "@type": "City", name: "Batumi" },
-        sameAs: [site.instagram],
+        sameAs: [site.instagram, mapsPlaceLink],
         contactPoint: {
           "@type": "ContactPoint",
           telephone: site.phoneE164,
@@ -144,6 +145,17 @@ export function buildPostJsonLd(lang: BlogLocale, dict: Dictionary, post: Post) 
         author: { "@type": "Organization", name: site.name, url: absolute("/") },
         publisher: studioRef,
         isPartOf: { "@id": `${absolute(blogPath(lang))}#blog` },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${url}#faq`,
+        inLanguage: lang,
+        isPartOf: { "@id": `${url}#article` },
+        mainEntity: post.faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
       },
       breadcrumbs([
         { name: dict.blog.home, path: localePath(lang) },

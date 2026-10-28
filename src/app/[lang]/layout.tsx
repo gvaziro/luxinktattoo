@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
       canonical: localePath(lang),
       languages: languageAlternates(),
       types: hasBlog(lang)
-        ? { "application/rss+xml": [{ url: `${blogPath(lang)}/rss.xml`, title: `${site.name} — ${getDictionary(lang).blog.label}` }] }
+        ? { "application/rss+xml": [{ url: `${blogPath(lang)}/rss.xml`, title: `${site.name}: ${getDictionary(lang).blog.label}` }] }
         : undefined,
     },
     openGraph: {
@@ -81,6 +81,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     other: {
       "geo.region": "GE-AJ",
       "geo.placename": "Batumi",
+      "llms-txt": `${site.url}/llms.txt`,
     },
   };
 }

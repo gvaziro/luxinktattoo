@@ -6,9 +6,9 @@ export function Process({ dict }: { dict: Dictionary["process"] }) {
     <section id="process" className="relative border-t border-line px-(--gutter) py-28 md:py-40">
       <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div>
-          <SectionLabel index="06" label={dict.label} />
+          <SectionLabel as="h2" index="06" label={dict.label} />
           <SplitWords
-            as="h2"
+            as="p"
             text={dict.title}
             className="mt-8 block font-display text-[clamp(2.8rem,6vw,6rem)] font-light leading-[0.98]"
           />

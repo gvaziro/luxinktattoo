@@ -47,9 +47,9 @@ export function Work({ dict }: Props) {
     <section id="work" className="relative px-(--gutter) py-28 md:py-44">
       <div className="grid gap-10 md:grid-cols-12 md:items-end">
         <div className="md:col-span-8">
-          <SectionLabel index="02" label={dict.label} />
+          <SectionLabel as="h2" index="02" label={dict.label} />
           <SplitWords
-            as="h2"
+            as="p"
             text={dict.title}
             className="mt-8 block max-w-[14ch] font-display text-[clamp(3rem,7.5vw,7.5rem)] font-light leading-[0.95]"
           />

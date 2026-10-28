@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: site.name,
     short_name: site.shortName,
-    description: "Tattoo studio in Batumi, Georgia — custom designs by experienced artists.",
+    description: "Tattoo studio in Batumi, Georgia: custom designs by experienced artists.",
     start_url: "/",
     display: "standalone",
     background_color: "#0a0908",
