@@ -102,7 +102,7 @@ export function Footer({ lang, dict, nav, address, waMessage, blogHref, blogSlug
       </div>
 
       <div className="relative mt-20 select-none md:mt-28" aria-hidden="true">
-        <p className="flex justify-between overflow-hidden font-display text-[23.5vw] font-light leading-[0.8] tracking-[-0.02em] text-outline-bone">
+        <p className="latin-display flex justify-between overflow-hidden font-display text-[23.5vw] font-light leading-[0.8] tracking-[-0.02em] text-outline-bone">
           {"LUX INK".split("").map((ch, i) => (
             <motion.span
               key={i}

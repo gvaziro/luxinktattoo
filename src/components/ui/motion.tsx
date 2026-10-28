@@ -82,7 +82,7 @@ export function SplitWords({
     <Tag className={className} initial="hidden" {...trigger} variants={wordParent(delay, step)}>
       {words.map((word, i) => (
         <span key={i}>
-          <span className="inline-block overflow-hidden pb-[0.14em] -mb-[0.14em] align-top">
+          <span className="split-mask inline-block overflow-hidden pb-[0.14em] -mb-[0.14em] align-top">
             <motion.span className="inline-block origin-bottom-left will-change-transform" variants={wordChild}>
               {word}
             </motion.span>

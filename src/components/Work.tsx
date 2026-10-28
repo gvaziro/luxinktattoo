@@ -86,7 +86,8 @@ export function Work({ dict }: Props) {
       <Reveal className="mt-24 flex justify-center md:mt-40">
         <Magnetic>
           <PillLink href={site.instagram} external variant="ghost" size="lg" icon={<InstagramIcon />}>
-            {dict.more} · @{site.instagramHandle}
+            {dict.more}
+            <span className="hidden sm:inline"> · @{site.instagramHandle}</span>
           </PillLink>
         </Magnetic>
       </Reveal>

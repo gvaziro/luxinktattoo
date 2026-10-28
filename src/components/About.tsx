@@ -44,7 +44,7 @@ export function About({ dict }: { dict: Dictionary["about"] }) {
                 className="flex flex-col-reverse justify-end border-line pr-3 pt-6 [&:not(:first-child)]:border-l [&:not(:first-child)]:pl-4 md:[&:not(:first-child)]:pl-6"
               >
                 <dt className="mt-3 text-[0.68rem] uppercase leading-relaxed tracking-[0.16em] text-ash">{stat.label}</dt>
-                <dd className="font-display text-[clamp(2.6rem,5vw,4.6rem)] font-light leading-none text-bone lining-nums">
+                <dd className="latin-display font-display text-[clamp(2.6rem,5vw,4.6rem)] font-light leading-none text-bone lining-nums">
                   {stat.value}
                 </dd>
               </Reveal>

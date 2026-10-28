@@ -58,15 +58,23 @@ export function Studio({ dict }: { dict: Dictionary["studio"] }) {
               : "no-scrollbar snap-x snap-mandatory items-end gap-4 overflow-x-auto scroll-px-(--gutter)",
           )}
         >
-          <div className={cx("flex shrink-0 snap-start flex-col justify-center", pinned ? "w-[min(40vw,560px)] pr-6" : "w-[82vw] md:w-[min(44vw,560px)]")}>
-            <SectionLabel as="h2" index="04" label={dict.label} />
-            <SplitWords
-              as="p"
-              text={dict.title}
-              className="mt-8 block font-display text-[clamp(2.6rem,4.8vw,5rem)] font-light leading-[0.98]"
-            />
-            <p className="mt-8 max-w-md text-[0.98rem] leading-[1.8] text-ash">{dict.text}</p>
-            <p className="mt-10 flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.3em] text-bone-dim">
+          {/* Pinned: same height and offset as the first photo, so the title lines up with its top edge
+              and the hint with its bottom edge (mb-8 matches the photo caption below the image). */}
+          <div
+            className={cx(
+              "flex shrink-0 snap-start flex-col justify-between",
+              pinned ? "mb-8 h-[64svh] w-[min(40vw,560px)] -translate-y-[4vh] pr-6" : "w-[82vw] gap-12 md:w-[min(44vw,560px)]",
+            )}
+          >
+            <div>
+              <SectionLabel as="h2" index="04" label={dict.label} />
+              <SplitWords
+                as="p"
+                text={dict.title}
+                className="mt-8 block font-display text-[clamp(2.6rem,4.8vw,5rem)] font-light leading-[0.98]"
+              />
+            </div>
+            <p className="flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.3em] text-bone-dim">
               {dict.hint}
               <ArrowIcon className="size-4 rotate-45 text-blood" />
             </p>

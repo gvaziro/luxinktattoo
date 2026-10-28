@@ -135,7 +135,7 @@ export function Hero({ dict, waMessage }: Props) {
           {words.map((word, w) => (
             <span
               key={word}
-              className="glow block overflow-hidden font-display text-[clamp(5.5rem,24vw,19rem)] font-light leading-[0.8] tracking-[0.04em]"
+              className="latin-display glow block overflow-hidden font-display text-[clamp(5.5rem,24vw,19rem)] font-light leading-[0.8] tracking-[0.04em]"
             >
               {word.split("").map((char, i) => (
                 <motion.span

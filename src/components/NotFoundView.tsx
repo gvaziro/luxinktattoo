@@ -8,7 +8,7 @@ export function NotFoundView({ dict, home }: { dict: Dictionary["notFound"]; hom
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(40%_50%_at_50%_60%,rgba(200,22,29,0.16),transparent_70%)]"
       />
       <div className="relative">
-        <p className="font-display text-[clamp(7rem,30vw,22rem)] font-light leading-[0.8] text-outline-bone">404</p>
+        <p className="latin-display font-display text-[clamp(7rem,30vw,22rem)] font-light leading-[0.8] text-outline-bone">404</p>
         <h1 className="mt-8 font-display text-[clamp(2rem,4vw,3.4rem)] font-light">{dict.title}</h1>
         <p className="mt-4 text-ash">{dict.text}</p>
         <a

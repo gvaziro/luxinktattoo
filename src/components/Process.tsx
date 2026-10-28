@@ -21,7 +21,7 @@ export function Process({ dict }: { dict: Dictionary["process"] }) {
             <Reveal delay={0.12 * i} className="flex h-full flex-col p-8 md:p-10 lg:p-12">
               <span
                 aria-hidden="true"
-                className="font-display text-[clamp(5rem,9vw,8.5rem)] font-light leading-none text-outline-bone transition-colors duration-700 group-hover:text-blood/90"
+                className="latin-display font-display text-[clamp(5rem,9vw,8.5rem)] font-light leading-none text-outline-bone transition-colors duration-700 group-hover:text-blood/90"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>

@@ -14,7 +14,7 @@ export function Standards({ dict }: { dict: Dictionary["standards"] }) {
             <SplitWords
               as="p"
               text={dict.title}
-              className="mt-8 block max-w-[12ch] font-display text-[clamp(2.8rem,5.6vw,5.6rem)] font-light leading-[0.98]"
+              className="mt-8 block max-w-[12ch] font-display text-[clamp(2.8rem,5.6vw,5.6rem)] font-light leading-[0.98] [&:lang(ka)]:text-[clamp(2.2rem,4.4vw,4.6rem)]"
             />
           </div>
         </div>

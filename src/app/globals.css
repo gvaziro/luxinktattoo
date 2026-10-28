@@ -100,6 +100,30 @@ body {
   100% { transform: translateY(220%); }
 }
 
+/*
+ * Georgian (Mkhedruli) display type. Noto Serif Georgian has a far larger x-height than Cormorant and
+ * letters with tall ascenders and deep descenders, so at the same font-size it looked oversized, long
+ * words overflowed their columns and tight Latin line-heights made lines collide. Scale Georgian glyphs
+ * to Cormorant's x-height (0.386) and give the lines room. `.latin-display` marks brand/number type
+ * that keeps its tight Latin setting.
+ */
+:lang(ka) .font-display:not(.latin-display) {
+  font-size-adjust: 0.386;
+  line-height: 1.22;
+  /* ch-based max-widths are measured on Latin glyphs and are too narrow for Georgian words */
+  max-width: none;
+}
+/* Small spaced-out labels: Georgian words are long, so the wide Latin tracking would overflow narrow columns.
+   (Attribute selector: Tailwind drops plain-CSS rules that target its own `.uppercase` utility.) */
+:lang(ka) [class~="uppercase"] {
+  letter-spacing: 0.08em;
+  overflow-wrap: break-word;
+}
+:lang(ka) .split-mask {
+  padding-block: 0.12em 0.3em;
+  margin-block: -0.12em -0.3em;
+}
+
 .text-outline {
   color: transparent;
   -webkit-text-stroke: 1px currentColor;

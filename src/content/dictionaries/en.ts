@@ -133,7 +133,6 @@ export const en = {
   studio: {
     label: "Inside the tattoo studio",
     title: "A calm, cozy and welcoming space",
-    text: "High stucco ceilings, warm wood and soft light: a place where you can relax and feel at ease from the first sketch to the last line.",
     hint: "Scroll to explore",
     photos: {
       interior: { caption: "The studio", alt: "Main room of LUX INK tattoo studio with tattoo chairs and red lamps" },
