@@ -12,7 +12,7 @@ import {
 import { useRef } from "react";
 import { SparkIcon } from "./icons";
 import { usePrefersReducedMotion } from "./ui/usePrefersReducedMotion";
-import { cx } from "./ui/motion";
+import { cx } from "./ui/cx";
 
 const wrap = (min: number, max: number, v: number) => {
   const range = max - min;

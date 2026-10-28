@@ -16,7 +16,7 @@ export const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
 type ScrollOffset = NonNullable<Parameters<typeof useScroll>[0]>["offset"];
 
-export const cx = (...classes: (string | false | null | undefined)[]) => classes.filter(Boolean).join(" ");
+import { cx } from "./cx";
 
 /** Fades and lifts content in once it enters the viewport. */
 export function Reveal({
@@ -69,7 +69,7 @@ export function SplitWords({
   className?: string;
   delay?: number;
   step?: number;
-  as?: "span" | "h2" | "h3" | "p" | "div";
+  as?: "span" | "h1" | "h2" | "h3" | "p" | "div";
   animateOnMount?: boolean;
 }) {
   const Tag = motion[as] as typeof motion.span;

@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import type { Dictionary } from "@/content/i18n";
-import { Reveal, SectionLabel, SplitWords, cx } from "./ui/motion";
+import { cx } from "./ui/cx";
+import { Reveal, SectionLabel, SplitWords } from "./ui/motion";
 
 /** Accordion whose answers stay in the DOM (collapsed with CSS) so they remain crawlable. */
-export function Faq({ dict }: { dict: Dictionary["faq"] }) {
+export function Faq({ dict, index = "07" }: { dict: Dictionary["faq"]; index?: string }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -13,7 +14,7 @@ export function Faq({ dict }: { dict: Dictionary["faq"] }) {
       <div className="grid gap-14 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-4">
           <div className="md:sticky md:top-32">
-            <SectionLabel index="07" label={dict.label} />
+            <SectionLabel index={index} label={dict.label} />
             <SplitWords
               as="h2"
               text={dict.title}

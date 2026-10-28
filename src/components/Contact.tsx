@@ -3,7 +3,7 @@ import { directionsLink, mapEmbedSrc, site, whatsappLink } from "@/content/site"
 import { ArrowIcon, InstagramIcon, PinIcon, WhatsAppIcon } from "./icons";
 import { Magnetic, PillLink, Reveal, SectionLabel, SplitWords } from "./ui/motion";
 
-export function Contact({ dict }: { dict: Dictionary["contact"] }) {
+export function Contact({ dict, index = "08" }: { dict: Dictionary["contact"]; index?: string }) {
   const wa = whatsappLink(dict.waMessage);
 
   return (
@@ -13,7 +13,7 @@ export function Contact({ dict }: { dict: Dictionary["contact"] }) {
         className="pointer-events-none absolute -top-40 left-1/2 h-[60vh] w-[90vw] -translate-x-1/2 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(200,22,29,0.14),transparent_70%)]"
       />
 
-      <SectionLabel index="08" label={dict.label} className="relative" />
+      <SectionLabel index={index} label={dict.label} className="relative" />
       <SplitWords
         as="h2"
         text={dict.title}

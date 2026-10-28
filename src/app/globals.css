@@ -127,6 +127,95 @@ body {
   display: none;
 }
 
+/* Long-form article typography */
+.prose-ink {
+  color: var(--color-bone-dim);
+  font-size: 1.06rem;
+  line-height: 1.85;
+}
+.prose-ink > * + * {
+  margin-top: 1.4em;
+}
+.prose-ink h2 {
+  margin-top: 2.6em;
+  scroll-margin-top: 96px;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-bone);
+}
+.prose-ink h3 {
+  margin-top: 2em;
+  scroll-margin-top: 96px;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-bone);
+}
+.prose-ink h2 + *,
+.prose-ink h3 + * {
+  margin-top: 0.8em;
+}
+.prose-ink strong {
+  color: var(--color-bone);
+  font-weight: 600;
+}
+.prose-ink em {
+  font-family: var(--font-display);
+  font-size: 1.12em;
+}
+.prose-ink a {
+  color: var(--color-bone);
+  text-decoration: underline;
+  text-decoration-color: var(--color-blood);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: color 0.3s;
+}
+.prose-ink a:hover {
+  color: var(--color-blood);
+}
+.prose-ink ul,
+.prose-ink ol {
+  padding-left: 1.4em;
+}
+.prose-ink ul {
+  list-style: none;
+}
+.prose-ink ul > li {
+  position: relative;
+}
+.prose-ink ul > li::before {
+  content: "";
+  position: absolute;
+  left: -1.2em;
+  top: 0.85em;
+  width: 0.55em;
+  height: 1px;
+  background: var(--color-blood);
+}
+.prose-ink ol {
+  list-style: decimal;
+}
+.prose-ink ol > li::marker {
+  color: var(--color-blood);
+  font-size: 0.85em;
+}
+.prose-ink li + li {
+  margin-top: 0.5em;
+}
+.prose-ink blockquote {
+  border-left: 1px solid var(--color-blood);
+  padding-left: 1.4em;
+  font-family: var(--font-display);
+  font-size: 1.4em;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--color-bone);
+}
+
 /* Dark map */
 .map-dark {
   filter: grayscale(1) invert(0.92) contrast(0.88) brightness(0.9);

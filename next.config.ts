@@ -18,12 +18,25 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     qualities: [75],
   },
-  // English is the default locale and lives at the root URL.
+  // English is the default locale and lives at the root URL (/, /blog, /blog/:slug).
   async redirects() {
-    return [{ source: "/en", destination: "/", permanent: true }];
+    return [
+      { source: "/en", destination: "/", permanent: true },
+      { source: "/en/blog", destination: "/blog", permanent: true },
+      // Articles only: generated files such as the OG image and RSS feed stay reachable under /en/blog.
+      {
+        source: "/en/blog/:slug((?!opengraph-image|rss\\.xml)[^/]+)",
+        destination: "/blog/:slug",
+        permanent: true,
+      },
+    ];
   },
   async rewrites() {
-    return [{ source: "/", destination: "/en" }];
+    return [
+      { source: "/", destination: "/en" },
+      { source: "/blog", destination: "/en/blog" },
+      { source: "/blog/:slug", destination: "/en/blog/:slug" },
+    ];
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

@@ -1,5 +1,6 @@
+import { blogPath, lastModified, postPath, type BlogLocale, type Post } from "./blog";
 import { localePath, locales, type Dictionary, type Locale } from "./i18n";
-import { workImages, workOrder } from "./media";
+import { allImages, workImages, workOrder } from "./media";
 import { directionsLink, site, whatsappLink } from "./site";
 
 const absolute = (path: string) => `${site.url}${path}`;
@@ -74,6 +75,81 @@ export function buildJsonLd(lang: Locale, dict: Dictionary) {
           acceptedAnswer: { "@type": "Answer", text: item.a },
         })),
       },
+    ],
+  };
+}
+
+const studioRef = { "@id": `${site.url}/#studio` };
+
+function breadcrumbs(items: { name: string; path: string }[]) {
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: absolute(item.path),
+    })),
+  };
+}
+
+export function buildBlogJsonLd(lang: BlogLocale, dict: Dictionary, posts: Post[]) {
+  const url = absolute(blogPath(lang));
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Blog",
+        "@id": `${url}#blog`,
+        url,
+        name: dict.blog.title,
+        description: dict.blog.metaDescription,
+        inLanguage: lang,
+        publisher: studioRef,
+        blogPost: posts.map((post) => ({
+          "@type": "BlogPosting",
+          headline: post.title,
+          url: absolute(postPath(lang, post.slug)),
+          datePublished: post.published,
+          image: absolute(allImages[post.cover].src),
+        })),
+      },
+      breadcrumbs([
+        { name: dict.blog.home, path: localePath(lang) },
+        { name: dict.blog.label, path: blogPath(lang) },
+      ]),
+    ],
+  };
+}
+
+export function buildPostJsonLd(lang: BlogLocale, dict: Dictionary, post: Post) {
+  const url = absolute(postPath(lang, post.slug));
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${url}#article`,
+        mainEntityOfPage: url,
+        url,
+        headline: post.title,
+        description: post.description,
+        image: absolute(allImages[post.cover].src),
+        datePublished: post.published,
+        dateModified: lastModified(post),
+        inLanguage: lang,
+        articleSection: post.category,
+        keywords: post.keywords.join(", "),
+        wordCount: post.body.trim().split(/\s+/).length,
+        author: { "@type": "Organization", name: site.name, url: absolute("/") },
+        publisher: studioRef,
+        isPartOf: { "@id": `${absolute(blogPath(lang))}#blog` },
+      },
+      breadcrumbs([
+        { name: dict.blog.home, path: localePath(lang) },
+        { name: dict.blog.label, path: blogPath(lang) },
+        { name: post.title, path: postPath(lang, post.slug) },
+      ]),
     ],
   };
 }

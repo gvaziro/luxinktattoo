@@ -2,33 +2,49 @@
 
 import { useLenis } from "lenis/react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState, type MouseEvent } from "react";
 import { locales, localeMeta, localePath, type Dictionary, type Locale } from "@/content/i18n";
+import { alternatePath, isHomePath, sectionHref, type BlogSlugMap } from "@/content/routes";
 import { site, whatsappLink } from "@/content/site";
 import { InstagramIcon, WhatsAppIcon } from "./icons";
-import { EASE_OUT, PillLink, cx } from "./ui/motion";
+import { cx } from "./ui/cx";
+import { EASE_OUT, PillLink } from "./ui/motion";
 
 type Props = {
   lang: Locale;
   nav: Dictionary["nav"];
   waMessage: string;
+  /** Blog index path for this language, or null when the language has no articles. */
+  blogHref: string | null;
+  blogSlugs: BlogSlugMap;
 };
 
-export function Header({ lang, nav, waMessage }: Props) {
+export function Header({ lang, nav, waMessage, blogHref, blogSlugs }: Props) {
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const lenis = useLenis();
+  const pathname = usePathname();
+  const onHome = isHomePath(lang, pathname);
   const { scrollY, scrollYProgress } = useScroll();
 
+  const section = (hash: string) => sectionHref(lang, hash, onHome);
   const links = [
-    { href: "#about", label: nav.about },
-    { href: "#work", label: nav.work },
-    { href: "#standards", label: nav.standards },
-    { href: "#studio", label: nav.studio },
-    { href: "#faq", label: nav.faq },
-    { href: "#contact", label: nav.contact },
+    { href: section("#about"), label: nav.about },
+    { href: section("#work"), label: nav.work },
+    { href: section("#standards"), label: nav.standards },
+    { href: section("#studio"), label: nav.studio },
+    ...(blogHref ? [{ href: blogHref, label: nav.blog }] : []),
+    { href: section("#faq"), label: nav.faq },
+    { href: section("#contact"), label: nav.contact },
   ];
+
+  // In-page anchors scroll smoothly; links to other pages navigate normally.
+  const onLinkClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) goTo(e, href);
+    else setOpen(false);
+  };
 
   useMotionValueEvent(scrollY, "change", (current) => {
     const previous = scrollY.getPrevious() ?? 0;
@@ -85,8 +101,8 @@ export function Header({ lang, nav, waMessage }: Props) {
       >
         <div className="flex h-[72px] items-center justify-between px-(--gutter)">
           <a
-            href="#top"
-            onClick={(e) => goTo(e, "#top")}
+            href={onHome ? "#top" : localePath(lang)}
+            onClick={(e) => onLinkClick(e, onHome ? "#top" : localePath(lang))}
             className="relative z-10 flex flex-col leading-none"
             aria-label={`${site.shortName} — ${localeMeta[lang].name}`}
           >
@@ -100,8 +116,9 @@ export function Header({ lang, nav, waMessage }: Props) {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    onClick={(e) => goTo(e, link.href)}
-                    className="group relative py-2 text-[0.7rem] uppercase tracking-[0.24em] text-bone-dim transition-colors hover:text-bone"
+                    onClick={(e) => onLinkClick(e, link.href)}
+                    aria-current={link.href === blogHref && pathname.startsWith(blogHref) ? "page" : undefined}
+                    className="group relative py-2 text-[0.7rem] uppercase tracking-[0.24em] text-bone-dim transition-colors hover:text-bone aria-[current=page]:text-bone"
                   >
                     {link.label}
                     <span className="absolute inset-x-0 -bottom-0.5 h-px origin-right scale-x-0 bg-blood transition-transform duration-500 ease-out-expo group-hover:origin-left group-hover:scale-x-100" />
@@ -112,7 +129,13 @@ export function Header({ lang, nav, waMessage }: Props) {
           </nav>
 
           <div className="relative z-10 flex items-center gap-4 md:gap-6">
-            <LanguageSwitch lang={lang} label={nav.language} className="hidden md:flex" />
+            <LanguageSwitch
+              lang={lang}
+              label={nav.language}
+              pathname={pathname}
+              slugs={blogSlugs}
+              className="hidden md:flex"
+            />
             <span className="hidden sm:block">
               <PillLink href={wa} external variant="primary" icon={<WhatsAppIcon />}>
                 {nav.book}
@@ -161,7 +184,7 @@ export function Header({ lang, nav, waMessage }: Props) {
                   <li key={link.href} className="overflow-hidden">
                     <motion.a
                       href={link.href}
-                      onClick={(e) => goTo(e, link.href)}
+                      onClick={(e) => onLinkClick(e, link.href)}
                       className="flex items-baseline gap-4 py-1 font-display text-[clamp(2.4rem,11vw,4.5rem)] leading-[1.05]"
                       initial={{ y: "110%" }}
                       animate={{ y: "0%" }}
@@ -181,7 +204,7 @@ export function Header({ lang, nav, waMessage }: Props) {
               animate={{ opacity: 1, transition: { delay: 0.6 } }}
               exit={{ opacity: 0 }}
             >
-              <LanguageSwitch lang={lang} label={nav.language} />
+              <LanguageSwitch lang={lang} label={nav.language} pathname={pathname} slugs={blogSlugs} />
               <div className="flex flex-wrap gap-3">
                 <PillLink href={wa} external icon={<WhatsAppIcon />}>
                   WhatsApp
@@ -198,14 +221,26 @@ export function Header({ lang, nav, waMessage }: Props) {
   );
 }
 
-function LanguageSwitch({ lang, label, className }: { lang: Locale; label: string; className?: string }) {
+function LanguageSwitch({
+  lang,
+  label,
+  pathname,
+  slugs,
+  className,
+}: {
+  lang: Locale;
+  label: string;
+  pathname: string;
+  slugs: BlogSlugMap;
+  className?: string;
+}) {
   return (
     <ul aria-label={label} className={cx("flex items-center gap-3 text-[0.7rem] tracking-[0.2em]", className)}>
       {locales.map((l, i) => (
         <li key={l} className="flex items-center gap-3">
           {i > 0 ? <span className="h-3 w-px bg-line" aria-hidden="true" /> : null}
           <a
-            href={localePath(l)}
+            href={alternatePath(pathname, lang, l, slugs)}
             hrefLang={localeMeta[l].hreflang}
             lang={localeMeta[l].hreflang}
             aria-current={l === lang ? "page" : undefined}

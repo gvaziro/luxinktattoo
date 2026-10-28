@@ -2,11 +2,14 @@
 
 import { useLenis } from "lenis/react";
 import { motion } from "motion/react";
+import { usePathname } from "next/navigation";
 import { useSyncExternalStore } from "react";
-import { locales, localeMeta, localePath, type Dictionary, type Locale } from "@/content/i18n";
+import { locales, localeMeta, type Dictionary, type Locale } from "@/content/i18n";
+import { alternatePath, isHomePath, sectionHref, type BlogSlugMap } from "@/content/routes";
 import { site, whatsappLink } from "@/content/site";
 import { ArrowIcon } from "./icons";
-import { EASE_OUT, cx } from "./ui/motion";
+import { cx } from "./ui/cx";
+import { EASE_OUT } from "./ui/motion";
 
 const noopSubscribe = () => () => {};
 
@@ -16,19 +19,24 @@ type Props = {
   nav: Dictionary["nav"];
   address: string;
   waMessage: string;
+  blogHref: string | null;
+  blogSlugs: BlogSlugMap;
 };
 
-export function Footer({ lang, dict, nav, address, waMessage }: Props) {
+export function Footer({ lang, dict, nav, address, waMessage, blogHref, blogSlugs }: Props) {
   const lenis = useLenis();
+  const pathname = usePathname();
   // Rendered statically at build time, refreshed on the client so the year never goes stale.
   const year = useSyncExternalStore(noopSubscribe, () => new Date().getFullYear(), () => 2026);
+  const section = (hash: string) => sectionHref(lang, hash, isHomePath(lang, pathname));
   const links = [
-    { href: "#about", label: nav.about },
-    { href: "#work", label: nav.work },
-    { href: "#standards", label: nav.standards },
-    { href: "#studio", label: nav.studio },
-    { href: "#faq", label: nav.faq },
-    { href: "#contact", label: nav.contact },
+    { href: section("#about"), label: nav.about },
+    { href: section("#work"), label: nav.work },
+    { href: section("#standards"), label: nav.standards },
+    { href: section("#studio"), label: nav.studio },
+    ...(blogHref ? [{ href: blogHref, label: nav.blog }] : []),
+    { href: section("#faq"), label: nav.faq },
+    { href: section("#contact"), label: nav.contact },
   ];
 
   const toTop = () => {
@@ -79,7 +87,7 @@ export function Footer({ lang, dict, nav, address, waMessage }: Props) {
             {locales.map((l) => (
               <li key={l}>
                 <a
-                  href={localePath(l)}
+                  href={alternatePath(pathname, lang, l, blogSlugs)}
                   hrefLang={localeMeta[l].hreflang}
                   lang={localeMeta[l].hreflang}
                   aria-current={l === lang ? "page" : undefined}

@@ -12,20 +12,44 @@ npm run build && npm run start
 
 ## Перед публикацией
 
-1. Укажите домен в переменной окружения `NEXT_PUBLIC_SITE_URL` (см. `.env.example`). От неё строятся canonical, hreflang, `sitemap.xml`, `robots.txt`, Open Graph и schema.org. На Vercel без неё используется production-домен проекта.
-2. Подключите домен в Google Search Console и Яндекс Вебмастере, отправьте `/sitemap.xml`.
-3. Заведите / обновите карточку в Google Business Profile с тем же адресом и телефоном (NAP должен совпадать с сайтом).
+1. Укажите домен в переменной окружения `NEXT_PUBLIC_SITE_URL` (см. `.env.example`). От неё строятся canonical, hreflang, `sitemap.xml`, `robots.txt`, RSS, Open Graph и schema.org. На Vercel без неё используется production-домен проекта.
+2. Добавьте сайт в Google Search Console, Яндекс Вебмастер и Bing Webmaster Tools. Коды подтверждения из мета-тегов вставьте в `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`, `NEXT_PUBLIC_YANDEX_VERIFICATION`, `NEXT_PUBLIC_BING_SITE_VERIFICATION`, затем отправьте `/sitemap.xml`.
+3. Заведите / обновите карточку в Google Business Profile с тем же адресом и телефоном (NAP должен совпадать с сайтом) и укажите сайт в ней и в шапке Instagram.
 4. Грузинский перевод (`src/content/dictionaries/ka.ts`) желательно вычитать носителем языка.
 
 ## Языки и адреса
 
-| Язык | URL |
-| --- | --- |
-| English (по умолчанию) | `/` |
-| Русский | `/ru` |
-| ქართული | `/ka` |
+| Страница | English (по умолчанию) | Русский | ქართული |
+| --- | --- | --- | --- |
+| Главная | `/` | `/ru` | `/ka` |
+| Журнал (блог) | `/blog` | `/ru/blog` | — |
+| Статья | `/blog/<slug>` | `/ru/blog/<slug>` | — |
+| RSS | `/blog/rss.xml` | `/ru/blog/rss.xml` | — |
 
-`/en` постоянно редиректит на `/`. Весь текст — в `src/content/dictionaries/*.ts`, контакты и ссылки — в `src/content/site.ts`.
+`/en`, `/en/blog` и `/en/blog/<slug>` постоянно редиректят на адреса без `/en`. Весь текст интерфейса — в `src/content/dictionaries/*.ts`, контакты и ссылки — в `src/content/site.ts`.
+
+## Блог
+
+Статьи лежат в `src/content/blog/posts/<язык>/<slug>.ts`: метаданные + текст в Markdown.
+
+Как добавить статью:
+
+1. Скопируйте любую существующую статью, поменяйте `slug`, `title`, `seoTitle` (до ~60 символов), `description` (до ~160), `keywords`, `category`, даты и `cover` (ключ фото из `src/content/media.ts`).
+2. У переводов одной статьи должен совпадать `translationKey` — так связываются hreflang и переключатель языка.
+3. Подключите файл в `src/content/blog/index.ts`.
+
+Статья автоматически попадает в журнал, блок «Из журнала» на главной, `sitemap.xml`, RSS и `llms.txt`, получает оглавление, OG-картинку с заголовком и разметку `BlogPosting`.
+
+Темы и ключевые запросы текущих статей:
+
+| Тема | EN | RU |
+| --- | --- | --- |
+| Тату в отпуске в Батуми | tattoo Batumi, tattoo on holiday | тату Батуми, можно ли купаться после тату |
+| Как выбрать тату-салон в Батуми | tattoo studio Batumi | тату салон Батуми, тату мастер Батуми |
+| Уход за татуировкой | tattoo aftercare | уход за татуировкой, заживление тату |
+| Стили татуировок | tattoo styles, fine line, realism | стили татуировок, файнлайн, реализм |
+| Подготовка к сеансу | how to prepare for a tattoo | как подготовиться к тату |
+| Больно ли делать тату | tattoo pain chart | больно ли делать тату |
 
 ## Фото
 
@@ -42,9 +66,11 @@ node scripts/generate-icons.mjs
 
 ## SEO, что уже есть
 
-- Статический пререндер всех языков, `lang` у `<html>`, один `h1` на странице.
-- Title / description / keywords на каждом языке, canonical, hreflang (+ `x-default`), Open Graph, Twitter Card.
-- Динамическая OG-картинка 1200×630 (`src/app/[lang]/opengraph-image.tsx`).
-- JSON-LD: `WebSite`, `TattooParlor` (адрес, телефон, Instagram, карта), `WebPage`, `FAQPage`.
-- `sitemap.xml` с языковыми альтернативами и картинками работ, `robots.txt`, `manifest.webmanifest`.
-- Alt-тексты всех фото на трёх языках, ответы FAQ всегда в HTML (видны поисковикам).
+- Статический пререндер всех страниц, `lang` у `<html>`, один `h1` на странице, хлебные крошки.
+- Title / description / keywords на каждом языке, canonical, hreflang (+ `x-default`), Open Graph (`article` для статей), Twitter Card.
+- OG-картинки 1200×630: брендовая для главной и журнала, с заголовком — для каждой статьи.
+- JSON-LD: `WebSite`, `TattooParlor` (адрес, телефон, Instagram, карта), `WebPage`, `FAQPage`, `Blog`, `BlogPosting`, `BreadcrumbList`.
+- `sitemap.xml` (главные, журнал, статьи, языковые альтернативы, картинки), `robots.txt`, RSS, `manifest.webmanifest`, `llms.txt` для AI-поисковиков.
+- Перелинковка: статьи ссылаются друг на друга и на разделы главной, на главной — последние статьи, под статьёй — «Читайте также».
+- Мета-теги верификации Google / Яндекс / Bing через переменные окружения.
+- Alt-тексты всех фото, ответы FAQ всегда в HTML (видны поисковикам).

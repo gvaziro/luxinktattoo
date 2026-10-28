@@ -6,7 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import type { Dictionary } from "@/content/i18n";
 import { studioImages, studioOrder } from "@/content/media";
 import { ArrowIcon } from "./icons";
-import { SectionLabel, SplitWords, cx } from "./ui/motion";
+import { cx } from "./ui/cx";
+import { SectionLabel, SplitWords } from "./ui/motion";
 import { usePrefersReducedMotion } from "./ui/usePrefersReducedMotion";
 
 /** Pinned horizontal gallery on desktop, swipeable strip on touch screens. */

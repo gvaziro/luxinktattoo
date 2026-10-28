@@ -25,3 +25,7 @@ export type StudioKey = keyof typeof studioImages;
 export const studioOrder: StudioKey[] = ["interior", "workspace", "lounge", "chandelier", "details"];
 
 export const brandImages = { statue } as const;
+
+/** Every photo by key, e.g. for blog covers. Work and studio keys never collide. */
+export const allImages = { ...workImages, ...studioImages } as const;
+export type ImageKey = keyof typeof allImages;
